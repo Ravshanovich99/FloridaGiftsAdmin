@@ -55,7 +55,7 @@
         v-model="newCard.cardSnippet"
         label="Enter card description"
       ></v-text-field>
-      <div v-if="reference != 'glasses'" class="item-details-container">
+      <div class="item-details-container">
         <div class="item-details">
           <div class="item-sizes">
             <v-text-field
@@ -171,13 +171,6 @@
             placeholder="price"
           ></v-text-field>
         </div>
-      </div>
-      <div v-else class="glases-price-container">
-        <v-text-field
-          v-model="newCard.glassesPrice"
-          type="number"
-          placeholder="Enter price"
-        ></v-text-field>
       </div>
       <div class="card-checkboxes">
         <v-checkbox
