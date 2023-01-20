@@ -125,6 +125,52 @@
             placeholder="price"
           ></v-text-field>
         </div>
+        <div class="item-details">
+          <div class="item-sizes">
+            <v-text-field
+              v-model="newCard.size4.width"
+              type="number"
+              class="item-size"
+              placeholder="size"
+            ></v-text-field>
+            <p>x</p>
+            <v-text-field
+              v-model="newCard.size4.height"
+              type="number"
+              class="item-size"
+              placeholder="size"
+            ></v-text-field>
+          </div>
+          <v-text-field
+            v-model="newCard.size4.price"
+            type="number"
+            class="item-price"
+            placeholder="price"
+          ></v-text-field>
+        </div>
+        <div class="item-details">
+          <div class="item-sizes">
+            <v-text-field
+              v-model="newCard.size5.width"
+              type="number"
+              class="item-size"
+              placeholder="size"
+            ></v-text-field>
+            <p>x</p>
+            <v-text-field
+              v-model="newCard.size5.height"
+              type="number"
+              class="item-size"
+              placeholder="size"
+            ></v-text-field>
+          </div>
+          <v-text-field
+            v-model="newCard.size5.price"
+            type="number"
+            class="item-price"
+            placeholder="price"
+          ></v-text-field>
+        </div>
       </div>
       <div v-else class="glases-price-container">
         <v-text-field
@@ -198,7 +244,16 @@ export default {
           height: '',
           price: '',
         },
-        glassesPrice: '',
+        size4: {
+          width: '',
+          height: '',
+          price: '',
+        },
+        size5: {
+          width: '',
+          height: '',
+          price: '',
+        },
       },
     }
   },
@@ -208,10 +263,9 @@ export default {
         this.newCard.cardImages.length > 0 &&
         this.newCard.cardTitle &&
         this.newCard.cardSnippet &&
-        ((this.newCard.size1.width &&
-          this.newCard.size1.height &&
-          this.newCard.size1.price) ||
-          this.newCard.glassesPrice)
+        this.newCard.size1.width &&
+        this.newCard.size1.height &&
+        this.newCard.size1.price
       ) {
         return true
       }
@@ -268,13 +322,13 @@ export default {
             description: this.newCard.cardSnippet,
             video: '',
             images: [],
-            prices: this.newCard.glassesPrice
-              ? this.newCard.glassesPrice
-              : {
-                  size1: this.newCard.size1,
-                  size2: this.newCard.size2,
-                  size3: this.newCard.size3,
-                },
+            prices: {
+              size1: this.newCard.size1.width && this.newCard.size1,
+              size2: this.newCard.size2.width && this.newCard.size2,
+              size3: this.newCard.size3.width && this.newCard.size3,
+              size4: this.newCard.size4.width && this.newCard.size4,
+              size5: this.newCard.size5.width && this.newCard.size5,
+            },
             bests: this.newCard.includeBests,
             populars: this.newCard.includePopulars,
           }

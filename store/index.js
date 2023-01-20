@@ -3,7 +3,8 @@
 export const state = () => ({
   albums: [],
   portrets: [],
-  glasses: []
+  glasses: [],
+  photolamp: []
 
 })
 
