@@ -1,3 +1,3 @@
 <template>
-  <PageWithCards :reference="'glasses'" />
+  <PageWithCards :reference="'notebooks'" />
 </template>
