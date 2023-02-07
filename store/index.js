@@ -4,7 +4,8 @@ export const state = () => ({
   albums: [],
   portrets: [],
   notebooks: [],
-  photolamp: []
+  photolamp: [],
+  authedUsers: []
 
 })
 
@@ -15,6 +16,10 @@ export const mutations = {
     }
     state[reference] = data
     // console.log('setCards', state);
+  },
+
+  setAuthedUsers(state, users) {
+    state.authedUsers = users
   },
 
   deleteCardById(state, { cardDbRef, reference }) {
@@ -35,7 +40,9 @@ export const getters = {
   getStateByReference: (state) => (reference) => {
     // console.log('getters cards', state[reference]);
     return state[reference]
-  }
+  },
+
+  getAuthedUsers: state => state.authedUsers
 }
 
 export const actions = {
@@ -65,6 +72,17 @@ export const actions = {
       await commit('setState', { data, reference })
     } catch (error) {
       console.log(error)
+    }
+  },
+
+  async getAuthedUsersFromDb({ dispatch, commit }) {
+    try {
+      const usersDbRef = await this.$fire.database.ref('users')
+      const { data } = await this.$axios.get(usersDbRef.toString() + '.json')
+      // console.log(data);
+      commit('setAuthedUsers', data)
+    } catch (error) {
+      console.log(error);
     }
   }
 }
