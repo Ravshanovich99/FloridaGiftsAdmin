@@ -5,11 +5,16 @@ export const state = () => ({
   portrets: [],
   notebooks: [],
   photolamp: [],
-  authedUsers: []
+  authedUsers: [],
+  user: false
 
 })
 
 export const mutations = {
+  userIsAdmin(state) {
+    state.user = true
+  },
+
   setState(state, { data, reference }) {
     for (const dbId in data.cards) {
       data.cards[dbId].dbId = dbId // to delete exact card by its id of database
@@ -46,6 +51,39 @@ export const getters = {
 }
 
 export const actions = {
+
+  onAuthStateChangedAction: (ctx, { authUser, claims }) => {
+    try {
+      if (authUser.uid === process.env.ADMIN_UID) {
+        ctx.commit("userIsAdmin")
+        // eslint-disable-next-line no-undef
+        $nuxt.$router.push('/')
+
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  setUserAction({ commit }) {
+  },
+
+
+  async login({ dispatch, commit }, { email, password }) {
+    try {
+      const result = await this.$fire.auth.signInWithEmailAndPassword(email, password)
+      if (result.user.uid === process.env.ADMIN_UID) {
+        commit("userIsAdmin")
+        // eslint-disable-next-line no-undef
+        $nuxt.$router.push('/')
+      }
+    }
+    catch (e) {
+      console.log(e);
+    }
+  },
+
+
   async deleteCard({ commit, dispatch }, { cardMediaRef, cardDbRef, reference }) {
     // console.log('async deleteCard', reference);
     try {
@@ -84,5 +122,5 @@ export const actions = {
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 }

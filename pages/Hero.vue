@@ -1,17 +1,10 @@
 <template>
   <div class="container">
     <div class="form-textarea">
-      <v-text-field
-        v-model="heroTitle"
-        class="form-textarea"
-        label="Enter title that you want to see in hero page"
-      >
+      <v-text-field v-model="heroTitle" class="form-textarea" label="Enter title that you want to see in hero page">
       </v-text-field>
-      <v-text-field
-        v-model="heroSubtitle"
-        class="form-textarea"
-        label="Enter subtitle that you want to see in hero page"
-      >
+      <v-text-field v-model="heroSubtitle" class="form-textarea"
+        label="Enter subtitle that you want to see in hero page">
       </v-text-field>
     </div>
     <!-- <div class="form-image">
@@ -35,6 +28,7 @@
 <script>
 export default {
   name: 'IndexPage',
+  middleware: 'authAdmin',
   data() {
     return {
       url: null,
@@ -82,8 +76,8 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    @media (max-width: 600px) {
-    }
+
+    @media (max-width: 600px) {}
 
     .v-input {
       @media (max-width: 600px) {
