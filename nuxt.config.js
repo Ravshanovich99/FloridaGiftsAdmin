@@ -33,9 +33,9 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxtjs/dotenv',
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
-    // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
   ],
 
@@ -56,7 +56,11 @@ export default {
           measurementId: process.env.MEASURMENT_ID
         },
         services: {
-          auth: true,
+          auth: {
+            initialize: {
+              onAuthStateChangedAction: 'onAuthStateChangedAction',
+            },
+          },
           storage: true,
           database: true
         }

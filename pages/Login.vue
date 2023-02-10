@@ -3,21 +3,10 @@
     <v-card shaped outlined class="login-card">
       <h2>Log In</h2>
       <v-form class="login-form" @submit.prevent="submitHandler">
-        <v-text-field
-          v-model="email"
-          label="Enter your email"
-          :rules="rules"
-          hide-details="auto"
-          class="input-field"
-        >
+        <v-text-field v-model="email" label="Enter your email" :rules="rules" hide-details="auto" class="input-field">
         </v-text-field>
-        <v-text-field
-          v-model="password"
-          label="Enter your password"
-          :rules="rules"
-          hide-details="auto"
-          class="input-field"
-        >
+        <v-text-field v-model="password" label="Enter your password" :rules="rules" hide-details="auto"
+          class="input-field">
         </v-text-field>
         <v-btn class="sub-btn" type="submit">Login</v-btn>
       </v-form>
@@ -55,9 +44,10 @@ export default {
           password: this.password,
         }
         try {
-          await this.$store.dispatch('auth/login', formData)
-          this.$router.push('/')
-        } catch (error) {}
+          await this.$store.dispatch('login', formData)
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
   },
@@ -70,6 +60,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+
   .login-card {
     width: 70%;
     height: 60%;

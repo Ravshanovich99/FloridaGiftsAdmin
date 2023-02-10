@@ -28,6 +28,7 @@
 
 <script>
 export default {
+  middleware: 'authAdmin',
   data() {
     return {
       usersShow: false
